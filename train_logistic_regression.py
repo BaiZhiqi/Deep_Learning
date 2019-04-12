@@ -36,22 +36,22 @@ def Forward(train_set_x_orig, train_set_y_orig, w, b):
     train_set_y_pred = 1 / (1 + np.exp(-tmp))
     loss = np.sum(-(np.dot(train_set_y_orig , np.log(train_set_y_pred).T) + np.dot((1 - train_set_y_orig) , np.log(1 - train_set_y_pred).T)) / len(
         train_set_x_orig))
-    acc = np.sum(np.logical_or(train_set_y_orig, (train_set_y_pred>=0.5).astype(np.uint8))) / np.shape(train_set_y_orig)[1]
+    acc = np.sum(1-np.logical_xor(train_set_y_orig, (train_set_y_pred>0.5).astype(np.uint8))) / np.shape(train_set_y_orig)[1]
     return loss, acc, train_set_y_pred
 
 def Back(train_set_x_orig, train_set_y_orig, train_set_y_pred, w, b, lr):
     dz = train_set_y_pred - train_set_y_orig
     dw = np.dot(dz, train_set_x_orig)
     db = dz
-    w = (w - lr * dw) / len(train_set_x_orig)
-    b = np.sum(b - lr * db) / len(train_set_x_orig)
+    w = w - lr * dw / len(train_set_x_orig)
+    b = b - np.sum(lr * db / len(train_set_x_orig))
     return w, b
 
 
 def main():
     batch_size = 5
     epochs = 1000
-    lr = 0.009
+    lr = 0.01
     train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes = load_data()
     train_shape = np.shape(train_set_x_orig)
     test_shape = np.shape(test_set_x_orig)
