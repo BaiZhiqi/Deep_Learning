@@ -1,7 +1,6 @@
 import numpy as np
-from math import log as log
-from math import exp as exp
-from load_datasets import load_data
+
+from First_Week.load_datasets import load_data
 
 
 def train(train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, batch_size, epoch, lr):
