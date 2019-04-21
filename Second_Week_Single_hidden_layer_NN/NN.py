@@ -20,9 +20,9 @@ class NN:
         ouput_size = Y.shape[0]
         # 权重初始化
         self.W1 = np.random.randn(hidden_num, input_size)*0.01
-        self.B1 = np.random.randn(hidden_num, 1)
+        self.B1 = np.zeros((hidden_num, 1))
         self.W2 = np.random.randn(ouput_size, hidden_num)*0.01
-        self.B2 = np.random.randn(ouput_size, 1)
+        self.B2 = np.zeros((ouput_size, 1))
 
     def train(self, X, Y, epochs=200, lr=1.2):
         for i in range(epochs):
