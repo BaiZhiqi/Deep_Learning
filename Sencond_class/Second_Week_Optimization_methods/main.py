@@ -22,7 +22,7 @@ def random_mini_batches(X,Y,mini_batch_size=64,seed=0):
     np.random.seed(seed)  # 指定随机种子
     m = X.shape[1]
     mini_batches = []
-
+    #打乱顺序
     permutation = list(np.random.permutation(m))
     X_shuffle = X[:,permutation]
     Y_shuffle = Y[:,permutation].reshape((1,m))
