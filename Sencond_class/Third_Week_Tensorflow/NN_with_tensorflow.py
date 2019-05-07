@@ -170,7 +170,7 @@ if __name__ == '__main__':
     # 计算时差
     print("CPU的执行时间 = " + str(end_time - start_time) + " 秒")
 
-    my_image1 = "2.jpg"
+    my_image1 = "3.jpg"
 
     fileName1 = r'E:\深度学习\第二课第三周编程作业\\' + my_image1
 
