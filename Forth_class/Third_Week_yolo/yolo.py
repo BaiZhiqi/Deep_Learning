@@ -135,12 +135,14 @@ def yolo_eval(yolo_outputs, image_shape=(720.,1280.),
     #去除低概率值
     scores, boxes, classes = yolo_filter_boxes(box_confidence, boxes, box_class_probs, score_threshold)
 
-    #因为输入是(720.,1280.)，而编码模型的输出为（608,608），所以需要对box进行按比例调整,
-    #我的理解是用(720.,1280.)resize到（608,608），但因为框无法进行resize，所以我们通过这个方式对框进行调整
-    boxes = yolo_utils.scale_boxes(boxes, image_shape)
+
 
     #非极大值抑制
     scores, boxes, classes = yolo_non_max_suppression(scores, boxes, classes, max_boxes=10, iou_threshold=0.5)
+
+    # 因为输入是(720.,1280.)，而编码模型的输出为（608,608），所以需要对box进行按比例调整,
+    # 我的理解是用(720.,1280.)resize到（608,608），但因为框无法进行resize，所以我们通过这个方式对框进行调整
+    boxes = yolo_utils.scale_boxes(boxes, image_shape)
 
     return scores, boxes, classes
 def predict(sess, image_file, is_show_info=True, is_plot=True):
